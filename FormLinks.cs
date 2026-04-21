@@ -85,28 +85,27 @@ namespace Menu_14
             string server = "localhost";
             string database = "snz_flora";
             string userId = "root";
-            string port = "3306";
+//            string port = "3306";
             string password = "root";
 
             PlantDataService service = new PlantDataService(server, database, userId, password);
             // Пример 2: Получить ссылки для конкретного латинского названия
-            string searchName = "Quercus robur"; // пример названия
+            string searchName = NameLat; // пример названия
             PlantLink[] links = service.GetPlantLinksArray(searchName);
 
-            // Количество триад
-            int triadCount = 3;
+            int triadCount = links.Length; // колличество строк в БД с таким же именем растения
 
             // Цикл для создания нескольких триад
             for (int i = 1; i <= triadCount; i++)
             {
-                // 1. Строка текста
-                string textString = $"Элемент {i}: Это текстовая строка, текстовая строка, текстовая строка...";
+                // 1. Строка текста   $"Элемент {i}: Это текстовая строка, текстовая строка, текстовая строка..."
+                string textString = links[i].Head ;
 
-                // 2. Ссылка (гиперссылка)
-                string link = $"https://www.74.ru"; // /item{i}
+                // 2. Ссылка (гиперссылка)   $"https://www.74.ru"
+                string link = links[i].Link; // /item{i}
 
                 // 3. Пробельная строка (пустая строка для разделения)
-                string emptyLine = "";
+                string emptyLine = " ";
 
                 // Добавляем все три элемента триады в ListBox
                 form.triadElements.Items.Add(textString);

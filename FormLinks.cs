@@ -64,53 +64,59 @@ namespace Menu_14
             FormLinks form = new FormLinks();
             form.labelNameRuShow.Text = nameRu;
             form.nameLat.Text = NameLat;
-     //       public string NameLatTo = NameLat;
-            form.richTextBox1.Text = listLinks;
-            string folderPath =  ConfigurationManager.AppSettings["catSubCutFotos"] +  NameLat;
-            form.currentFolderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
-            // Получаем первый файл или null, если папка пуста
-            string firstFile = Directory.EnumerateFiles(folderPath).FirstOrDefault();
-
-            if (firstFile != null)
+            if (listLinks.Length > 1)
             {
-                form.pictureBox1.Image = Image.FromFile(firstFile);
+                form.richTextBox1.Text = listLinks;
+                string folderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
+                form.currentFolderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
+                // Получаем первый файл или null, если папка пуста
+                string firstFile = Directory.EnumerateFiles(folderPath).FirstOrDefault();
+
+                if (firstFile != null)
+                {
+                    form.pictureBox1.Image = Image.FromFile(firstFile);
+                }
+                else
+                {
+                    Console.WriteLine("Файлов не найдено.");
+                }
+                // Очищаем ListBox перед добавлением
+                form.triadElements.Items.Clear();
+                // Настройки подключения к базе данных
+                string server = "localhost";
+                string database = "snz_flora";
+                string userId = "root";
+                //            string port = "3306";
+                string password = "root";
+
+                PlantDataService service = new PlantDataService(server, database, userId, password);
+                // Пример 2: Получить ссылки для конкретного латинского названия
+                string searchName = NameLat; // пример названия
+                PlantLink[] links = service.GetPlantLinksArray(searchName);
+
+                int triadCount = links.Length; // колличество строк в БД с таким же именем растения
+
+                // Цикл для создания нескольких триад
+                for (int i = 0; i < triadCount; i++)
+                {
+                    // 1. Строка текста   $"Элемент {i}: Это текстовая строка, текстовая строка, текстовая строка..."
+                    string textString = links[i].Head;
+
+                    // 2. Ссылка (гиперссылка)   
+                    string link = links[i].Link; 
+
+                    // 3. Пробельная строка (пустая строка для разделения)
+                    string emptyLine = " ";
+
+                    // Добавляем все три элемента триады в ListBox
+                    form.triadElements.Items.Add(textString);
+                    form.triadElements.Items.Add(link);
+                    form.triadElements.Items.Add(emptyLine);
+                }
             }
             else
             {
-                Console.WriteLine("Файлов не найдено.");
-            }
-            // Очищаем ListBox перед добавлением
-            form.triadElements.Items.Clear();
-            // Настройки подключения к базе данных
-            string server = "localhost";
-            string database = "snz_flora";
-            string userId = "root";
-//            string port = "3306";
-            string password = "root";
-
-            PlantDataService service = new PlantDataService(server, database, userId, password);
-            // Пример 2: Получить ссылки для конкретного латинского названия
-            string searchName = NameLat; // пример названия
-            PlantLink[] links = service.GetPlantLinksArray(searchName);
-
-            int triadCount = links.Length; // колличество строк в БД с таким же именем растения
-
-            // Цикл для создания нескольких триад
-            for (int i = 1; i <= triadCount; i++)
-            {
-                // 1. Строка текста   $"Элемент {i}: Это текстовая строка, текстовая строка, текстовая строка..."
-                string textString = links[i].Head ;
-
-                // 2. Ссылка (гиперссылка)   $"https://www.74.ru"
-                string link = links[i].Link; // /item{i}
-
-                // 3. Пробельная строка (пустая строка для разделения)
-                string emptyLine = " ";
-
-                // Добавляем все три элемента триады в ListBox
-                form.triadElements.Items.Add(textString);
-                form.triadElements.Items.Add(link);
-                form.triadElements.Items.Add(emptyLine);
+                form.richTextBox1.Text = "Материал не подобран, пока.";
             }
             form.Show();                        // или form.ShowDialog();
         }

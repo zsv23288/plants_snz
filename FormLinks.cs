@@ -109,9 +109,9 @@ namespace Menu_14
                     string emptyLine = " ";
 
                     // Добавляем все три элемента триады в ListBox
-                    form.triadElements.Items.Add(textString);
-                    form.triadElements.Items.Add(link);
-                    form.triadElements.Items.Add(emptyLine);
+                    form.triadElements.Items.Add(new ListBoxItem { Text = textString, IsLink = false });
+                    form.triadElements.Items.Add(new ListBoxItem { Text = link, IsLink = true });
+                    form.triadElements.Items.Add(new ListBoxItem { Text = emptyLine, IsLink = false });
                 }
             }
             else
@@ -119,6 +119,39 @@ namespace Menu_14
                 form.richTextBox1.Text = "Материал не подобран, пока.";
             }
             form.Show();                        // или form.ShowDialog();
+        }
+        // Класс для хранения элементов
+        public class ListBoxItem
+        {
+            public string Text { get; set; }
+            public bool IsLink { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        // Обработчик DrawItem
+        private void form_triadElements_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            ListBox listBox = sender as ListBox;
+            ListBoxItem item = listBox.Items[e.Index] as ListBoxItem;
+
+            if (item == null) return;
+
+            e.DrawBackground();
+
+            Color textColor = item.IsLink ? Color.Blue : Color.Black;
+
+            using (Brush brush = new SolidBrush(textColor))
+            {
+                e.Graphics.DrawString(item.Text, e.Font, brush, e.Bounds);
+            }
+
+            e.DrawFocusRectangle();
         }
 
         private void FormLinks_Load(object sender, EventArgs e)

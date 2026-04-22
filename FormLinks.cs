@@ -95,7 +95,7 @@ namespace Menu_14
                 PlantLink[] links = service.GetPlantLinksArray(searchName);
 
                 int triadCount = links.Length; // колличество строк в БД с таким же именем растения
-
+                // не жалко !!
                 // Цикл для создания нескольких триад
                 for (int i = 0; i < triadCount; i++)
                 {

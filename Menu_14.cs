@@ -127,11 +127,7 @@ namespace Menu_14
                 // Действия для другой колонки,  Проверка на валидные индексы
                 if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
                 {
-                //    var value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex ].Value;
-               //     string nameRu = value?.ToString() ?? "";
                     int aimColumn = e.ColumnIndex;
-               //     var value1 = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value;
-               //     string nameLat = value1?.ToString() ?? "";
                     switch (aimColumn)
                     {
                         case 0:
@@ -146,7 +142,7 @@ namespace Menu_14
                             string nameLat = value3?.ToString() ?? "";
                             var value4 = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 4].Value;
                             string nameRu = value4?.ToString() ?? "";
-                            FormLinks.workFormLinks(nameRu, nameLat, listXX);
+                            FormLinks.workFormLinks(nameRu, nameLat, listXX);   // вызов метода в FormLinks.cs
                             break;
                         default:
                             MessageBox.Show($"Клик ячейке - не определена: Row={e.RowIndex}, Column={e.ColumnIndex}");

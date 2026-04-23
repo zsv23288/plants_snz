@@ -64,22 +64,22 @@ namespace Menu_14
             FormLinks form = new FormLinks();
             form.labelNameRuShow.Text = nameRu;
             form.nameLat.Text = NameLat;
+            string folderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
+            string firstFile = Directory.EnumerateFiles(folderPath).FirstOrDefault();
+            if (firstFile != null)
+            {
+                form.pictureBox1.Image = Image.FromFile(firstFile);
+            }
+            else
+            {
+                Console.WriteLine("Файлов не найдено.");
+            }
+
             if (listLinks.Length > 1)
             {
                 form.richTextBox1.Text = listLinks;
-                string folderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
                 form.currentFolderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
-                // Получаем первый файл или null, если папка пуста
-                string firstFile = Directory.EnumerateFiles(folderPath).FirstOrDefault();
-
-                if (firstFile != null)
-                {
-                    form.pictureBox1.Image = Image.FromFile(firstFile);
-                }
-                else
-                {
-                    Console.WriteLine("Файлов не найдено.");
-                }
+           
                 // Очищаем ListBox перед добавлением
                 form.triadElements.Items.Clear();
    

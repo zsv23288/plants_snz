@@ -96,6 +96,10 @@ namespace Menu_14
                 {
                     // 1. Строка текста   $"Элемент {i}: Это текстовая строка, текстовая строка, текстовая строка..."
                     string textString = links[i].Head;
+                //    string textString = "Это очень длинная строка, которую необходимо разбить на несколько подстрок без перекрытия границы элемента ListBox";
+                     string[] subtextArray = SplitTextToFitListBox(textString, form.triadElements );
+
+                    
 
                     // 2. Ссылка (гиперссылка)   
                     string link = links[i].Link; 
@@ -105,7 +109,13 @@ namespace Menu_14
 
                     // Добавляем все три элемента триады в ListBox
                     form.triadElements.Items.Add(new ListBoxItem { Text = textString, IsLink = false });
-                    form.triadElements.Items.Add(new ListBoxItem { Text = link, IsLink = true });
+                    // Для проверки (можно добавить в ListBox)
+                    form.triadElements.Items.Clear();
+                    foreach (string line in subtextArray)
+                    {
+                        form.triadElements.Items.Add(line);
+                    }
+                    //    form.triadElements.Items.Add(new ListBoxItem { Text = link, IsLink = true });
                     form.triadElements.Items.Add(new ListBoxItem { Text = emptyLine, IsLink = false });
                 }
             }
@@ -158,6 +168,107 @@ namespace Menu_14
 
             // Запускаем FastStone с параметром (путь к изображению)
             Process.Start(fastStonePath, $"\"{currentFolderPath}\"");
+        }
+        /// <summary>
+        /// Разделяет строку на массив подстрок, каждая из которых помещается в заданную ширину ListBox.
+        /// </summary>
+        /// <param name="textString">Исходная строка для разбиения</param>
+        /// <param name="listBox">Ссылка на ListBox (для определения ширины и шрифта)</param>
+        /// <returns>Массив строк, помещающихся по ширине</returns>
+        private static string[] SplitTextToFitListBox(string textString, ListBox listBox)
+        {
+            if (string.IsNullOrEmpty(textString))
+                return new string[0];
+
+            // Определяем доступную ширину для текста
+            int maxWidth = listBox.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 5;
+            if (maxWidth <= 0)
+                maxWidth = listBox.Width - 10;
+
+            List<string> result = new List<string>();
+            string[] words = textString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (words.Length == 0)
+                return new string[0];
+
+            using (Graphics g = listBox.CreateGraphics())
+            {
+                string currentLine = "";
+
+                foreach (string word in words)
+                {
+                    string testLine = string.IsNullOrEmpty(currentLine) ? word : currentLine + " " + word;
+
+                    // Измеряем ширину тестовой строки
+                    SizeF textSize = g.MeasureString(testLine, listBox.Font);
+
+                    if (textSize.Width <= maxWidth)
+                    {
+                        // Помещается - добавляем слово к текущей строке
+                        currentLine = testLine;
+                    }
+                    else
+                    {
+                        // Не помещается - сохраняем текущую строку и начинаем новую
+                        if (!string.IsNullOrEmpty(currentLine))
+                            result.Add(currentLine);
+
+                        // Проверяем, помещается ли одно слово
+                        SizeF singleWordSize = g.MeasureString(word, listBox.Font);
+                        if (singleWordSize.Width <= maxWidth)
+                        {
+                            currentLine = word;
+                        }
+                        else
+                        {
+                            // Длинное слово - принудительно разбиваем
+                            currentLine = ForceBreakLongWord(word, maxWidth, g, listBox.Font);
+                            result.Add(currentLine);
+                            currentLine = "";
+                        }
+                    }
+                }
+
+                // Добавляем последнюю строку
+                if (!string.IsNullOrEmpty(currentLine))
+                    result.Add(currentLine);
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Принудительно разбивает длинное слово, если оно не помещается в одну строку
+        /// </summary>
+        private static string ForceBreakLongWord(string word, int maxWidth, Graphics g, Font font)
+        {
+            if (string.IsNullOrEmpty(word))
+                return word;
+
+            // Проверяем, помещается ли слово целиком
+            SizeF fullSize = g.MeasureString(word, font);
+            if (fullSize.Width <= maxWidth)
+                return word;
+
+            // Ищем максимальное количество символов, помещающихся в строку
+            for (int i = word.Length; i > 0; i--)
+            {
+                string part = word.Substring(0, i);
+                SizeF partSize = g.MeasureString(part, font);
+                if (partSize.Width <= maxWidth)
+                {
+                    // Возвращаем обрезанное слово (можно заменить на добавление дефиса)
+                    return part; // + "-" если нужен перенос по слогам
+                }
+            }
+
+            // Если даже один символ не помещается - возвращаем первый символ
+            return word.Length > 0 ? word[0].ToString() : "";
+        }
+
+        private void triadElements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

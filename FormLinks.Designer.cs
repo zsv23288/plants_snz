@@ -127,6 +127,7 @@
             this.triadElements.ScrollAlwaysVisible = true;
             this.triadElements.Size = new System.Drawing.Size(291, 355);
             this.triadElements.TabIndex = 10;
+            this.triadElements.SelectedIndexChanged += new System.EventHandler(this.triadElements_SelectedIndexChanged);
             // 
             // FormLinks
             // 

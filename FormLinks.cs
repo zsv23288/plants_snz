@@ -68,7 +68,7 @@ namespace Menu_14
             string firstFile = Directory.EnumerateFiles(folderPath).FirstOrDefault();
             if (firstFile != null)
             {
-                form.pictureBox1.Image = Image.FromFile(firstFile);
+                form.pictureBox1.Image = Image.FromFile(firstFile); //change 44
             }
             else
             {

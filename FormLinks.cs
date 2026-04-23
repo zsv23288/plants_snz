@@ -83,11 +83,7 @@ namespace Menu_14
                 // Очищаем ListBox перед добавлением
                 form.triadElements.Items.Clear();
                 // Настройки подключения к базе данных
-                string server = "localhost";
-                string database = "snz_flora";
-                string userId = "root";
-                //            string port = "3306";
-                string password = "root";
+                string server = "localhost";     string database = "snz_flora";   string userId = "root";   string password = "root";
 
                 PlantDataService service = new PlantDataService(server, database, userId, password);
                 // Пример 2: Получить ссылки для конкретного латинского названия
@@ -95,7 +91,7 @@ namespace Menu_14
                 PlantLink[] links = service.GetPlantLinksArray(searchName);
 
                 int triadCount = links.Length; // колличество строк в БД с таким же именем растения
-                // не жалко !!
+ 
                 // Цикл для создания нескольких триад
                 for (int i = 0; i < triadCount; i++)
                 {

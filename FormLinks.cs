@@ -82,10 +82,9 @@ namespace Menu_14
                 }
                 // Очищаем ListBox перед добавлением
                 form.triadElements.Items.Clear();
-                // Настройки подключения к базе данных
-                string server = "localhost";     string database = "snz_flora";   string userId = "root";   string password = "root";
-
-                PlantDataService service = new PlantDataService(server, database, userId, password);
+   
+                // Настройки подключения к базе данных в файле App.config
+                PlantDataService service = new PlantDataService();
                 // Пример 2: Получить ссылки для конкретного латинского названия
                 string searchName = NameLat; // пример названия
                 PlantLink[] links = service.GetPlantLinksArray(searchName);

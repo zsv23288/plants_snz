@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
@@ -18,9 +19,10 @@ namespace Menu_14
     {
         private string connectionString;
 
-        public PlantDataService(string server, string database, string userId, string password)
+        public PlantDataService()
         {
-            connectionString = $"Server={server};Database={database};Uid={userId};Pwd={password};";
+            connectionString = ConfigurationManager.AppSettings["floraBD"];
+            // connectionString = $"Server={server};Database={database};Uid={userId};Pwd={password};";
         }
 
         /// <summary>

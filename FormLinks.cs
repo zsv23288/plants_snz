@@ -107,22 +107,16 @@ namespace Menu_14
                     string textString = links[i].Head;
                     //    string textString = "Это очень длинная строка, которую необходимо разбить на несколько подстрок без перекрытия границы элемента ListBox";
                     string[] subtextArray = SplitTextToFitListBox(textString, form.triadElements);
-
-                    // 2. Ссылка (гиперссылка)   
-                    string link = links[i].Link;
-
-                    // 3. Пробельная строка (пустая строка для разделения)
-                    string emptyLine = " ";
-
-                    // Добавляем все три элемента триады в ListBox
-                    form.triadElements.Items.Add(new ListBoxItem { Text = textString, IsLink = false });
-                    // Для проверки (можно добавить в ListBox)
-                    form.triadElements.Items.Clear();
                     foreach (string line in subtextArray)
                     {
                         form.triadElements.Items.Add(line);
                     }
-                    //    form.triadElements.Items.Add(new ListBoxItem { Text = link, IsLink = true });
+                    // 2. Ссылка (гиперссылка)   
+                    string link = links[i].Link;
+                    form.triadElements.Items.Add(new ListBoxItem { Text = link, IsLink = true });
+                    
+                    // 3. Пробельная строка (пустая строка для разделения)
+                    string emptyLine = " ";
                     form.triadElements.Items.Add(new ListBoxItem { Text = emptyLine, IsLink = false });
                 }
             }

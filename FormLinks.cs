@@ -59,7 +59,7 @@ namespace Menu_14
                 }
             }
         }
-        public static void workFormLinks(string nameRu, string NameLat, string listLinks)
+        public static void workFormLinks(string nameRu, string NameLat, string thinkAboutIt)
         {
             FormLinks form = new FormLinks();
             form.labelNameRuShow.Text = nameRu;
@@ -75,34 +75,41 @@ namespace Menu_14
                 Console.WriteLine("Файлов не найдено.");
             }
 
-            if (listLinks.Length > 1)
+            // свои заметки в поле номер 13 из смартфона приложения определителя ростения floraincognita
+            if (thinkAboutIt.Length > 1)
             {
-                form.richTextBox1.Text = listLinks;
-                form.currentFolderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
-           
-                // Очищаем ListBox перед добавлением
-                form.triadElements.Items.Clear();
-   
-                // Настройки подключения к базе данных в файле App.config
-                PlantDataService service = new PlantDataService();
-                // Пример 2: Получить ссылки для конкретного латинского названия
-                string searchName = NameLat; // пример названия
-                PlantLink[] links = service.GetPlantLinksArray(searchName);
+                form.richTextBox1.Text = thinkAboutIt;
+            }
+            else
+            {
+                form.richTextBox1.Text = "Своих мыслей нет, пока...";
+            }
 
-                int triadCount = links.Length; // колличество строк в БД с таким же именем растения
+
+            // Очищаем ListBox перед добавлением
+            form.triadElements.Items.Clear();
+
+            // путь к базе данных в ПК файла App.config         
+            form.currentFolderPath = ConfigurationManager.AppSettings["catSubCutFotos"] + NameLat;
+   
+            PlantDataService service = new PlantDataService();
  
+            string searchName = NameLat; //  названия подкаталога с фото конкретного растение
+            PlantLink[] links = service.GetPlantLinksArray(searchName);
+
+            int triadCount = links.Length; // колличество строк в БД с таким же именем растения
+            if (triadCount > 0)
+            {
                 // Цикл для создания нескольких триад
                 for (int i = 0; i < triadCount; i++)
                 {
                     // 1. Строка текста   $"Элемент {i}: Это текстовая строка, текстовая строка, текстовая строка..."
                     string textString = links[i].Head;
-                //    string textString = "Это очень длинная строка, которую необходимо разбить на несколько подстрок без перекрытия границы элемента ListBox";
-                     string[] subtextArray = SplitTextToFitListBox(textString, form.triadElements );
-
-                    
+                    //    string textString = "Это очень длинная строка, которую необходимо разбить на несколько подстрок без перекрытия границы элемента ListBox";
+                    string[] subtextArray = SplitTextToFitListBox(textString, form.triadElements);
 
                     // 2. Ссылка (гиперссылка)   
-                    string link = links[i].Link; 
+                    string link = links[i].Link;
 
                     // 3. Пробельная строка (пустая строка для разделения)
                     string emptyLine = " ";
@@ -119,9 +126,8 @@ namespace Menu_14
                     form.triadElements.Items.Add(new ListBoxItem { Text = emptyLine, IsLink = false });
                 }
             }
-            else
-            {
-                form.richTextBox1.Text = "Материал не подобран, пока.";
+            else {
+                form.triadElements.Items.Add(new ListBoxItem { Text = "ссылки про это растение не найдены, пока...", IsLink = false });
             }
             form.Show();                        // или form.ShowDialog();
         }

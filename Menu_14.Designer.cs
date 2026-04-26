@@ -177,6 +177,7 @@
             this.протоколИзMySQLToolStripMenuItem.Name = "протоколИзMySQLToolStripMenuItem";
             this.протоколИзMySQLToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
             this.протоколИзMySQLToolStripMenuItem.Text = "очистка, протокол из MySQL";
+            this.протоколИзMySQLToolStripMenuItem.Click += new System.EventHandler(this.протоколИзMySQLToolStripMenuItem_Click);
             // 
             // bDРастенийВMySQLToolStripMenuItem
             // 

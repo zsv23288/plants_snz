@@ -226,5 +226,10 @@ namespace Menu_14
         {
             return ToString();
         }
+
+        private void протоколИзMySQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setMethods.cleanTable("protocol");
+        }
     }
 }

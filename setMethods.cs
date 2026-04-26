@@ -74,6 +74,7 @@ namespace Menu_14
                     {
                         cmd.ExecuteNonQuery();
                         Console.WriteLine("Таблица успешно очищена.");
+                        MessageBox.Show("Таблица успешно очищена: " + nameT);
                     }
                 }
                 catch (Exception ex)

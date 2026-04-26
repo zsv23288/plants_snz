@@ -21,7 +21,7 @@ namespace Menu_14
         public Menu_14()
         {
             InitializeComponent();
-            dataGridView1.CellClick += DataGridView1_CellClick; //  добавлено событие
+            dataGridView1.CellClick += DataGridView1_CellClick; //  добавлено событие, нажатие на поле таблицы БД
         }
 
         private void оснвныеДанныеИзBDMySQLToolStripMenuItem_Click(object sender, EventArgs e)   // выбор архива из папки
@@ -181,5 +181,11 @@ namespace Menu_14
             }
         }
 
+        private void изСмартфонаВБДToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setMethods.choiceFile("catExport");  // выбор архива из папки
+            // setMethods.choiceFile();
+            //  public static void choiceFile(string folderPath) // поиск первого архива
+        }
     }
 }

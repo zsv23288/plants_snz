@@ -217,7 +217,7 @@ namespace Menu_14
                     CreateNoWindow = true
                 }).WaitForExit();
                 FileInfo archiveInfo = new FileInfo(archivePath);
-                setMethods.ProtocolT($"Архив сохранен: {archivePath}", $"Размер архива: {archiveInfo.Length / 1024.0 / 1024.0:F2} MB","");
+                setMethods.ProtocolT($"Архив сохранен: {archivePath}", $"Размер архива: {archiveInfo.Length / 1024.0 / 1024.0:F2} MB","Фотографии растений");
                 Console.WriteLine($"Архив создан: {archivePath}");
             }
         }

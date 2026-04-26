@@ -16,6 +16,7 @@ using System.Windows.Forms;
 
 namespace Menu_14
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public partial class Menu_14 : Form
     {
         public Menu_14()
@@ -186,6 +187,43 @@ namespace Menu_14
             setMethods.choiceFile("catExport");  // выбор архива из папки
             // setMethods.choiceFile();
             //  public static void choiceFile(string folderPath) // поиск первого архива
+        }
+
+        private void фотографииРастенийВыгрузкаАрхивToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sourceDirectory = ConfigurationManager.AppSettings["catSubCutFotos"];
+            string sevenZipPath = ConfigurationManager.AppSettings["UnZip"];
+
+            // Диалог выбора места сохранения
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "7-Zip архив (*.7z)|*.7z|ZIP архив (*.zip)|*.zip",
+                Title = "Сохранить архив как",
+                FileName = $"{Path.GetFileName(sourceDirectory)}_{DateTime.Now:yyyyMMdd_HHmmss}"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string archivePath = saveFileDialog.FileName;
+                string archiveType = Path.GetExtension(archivePath).ToLower() == ".zip" ? "zip" : "7z";
+
+                string arguments = $"a -t{archiveType} \"{archivePath}\" \"{sourceDirectory}\" -mx5";
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = sevenZipPath,
+                    Arguments = arguments,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }).WaitForExit();
+
+                Console.WriteLine($"Архив создан: {archivePath}");
+            }
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            return ToString();
         }
     }
 }

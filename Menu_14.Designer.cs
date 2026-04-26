@@ -34,11 +34,20 @@
             this.оснвныеДанныеИзBDMySQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вывестиИзMySQLВТаблицуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ljfdbnmHfcnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изСмартфонаВБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.аннотацияПроРастениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очисткаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заменадополнеиеФотографииРастенийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактированиеФотографииРастенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.папкиСФотографиямиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.протоколИзMySQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bDРастенийВMySQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.историяПроектаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.инструкцияПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.тестМетодаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.записьПротоколаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.датаИзСтрокиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,15 +58,6 @@
             this.запускFormLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.заменадополнеиеФотографииРастенийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактированиеФотографииРастенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.историяПроектаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.инструкцияПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.изСмартфонаВБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.аннотацияПроРастениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -103,6 +103,19 @@
             this.ljfdbnmHfcnToolStripMenuItem.Size = new System.Drawing.Size(158, 23);
             this.ljfdbnmHfcnToolStripMenuItem.Text = "добавить растение(я)";
             // 
+            // изСмартфонаВБДToolStripMenuItem
+            // 
+            this.изСмартфонаВБДToolStripMenuItem.Name = "изСмартфонаВБДToolStripMenuItem";
+            this.изСмартфонаВБДToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.изСмартфонаВБДToolStripMenuItem.Text = "из Смартфона в БД";
+            this.изСмартфонаВБДToolStripMenuItem.Click += new System.EventHandler(this.изСмартфонаВБДToolStripMenuItem_Click);
+            // 
+            // аннотацияПроРастениеToolStripMenuItem
+            // 
+            this.аннотацияПроРастениеToolStripMenuItem.Name = "аннотацияПроРастениеToolStripMenuItem";
+            this.аннотацияПроРастениеToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.аннотацияПроРастениеToolStripMenuItem.Text = "аннотация про растение";
+            // 
             // очисткаToolStripMenuItem
             // 
             this.очисткаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -118,6 +131,37 @@
             this.очисткаToolStripMenuItem.Name = "очисткаToolStripMenuItem";
             this.очисткаToolStripMenuItem.Size = new System.Drawing.Size(76, 23);
             this.очисткаToolStripMenuItem.Text = "Утилиты";
+            // 
+            // заменадополнеиеФотографииРастенийToolStripMenuItem
+            // 
+            this.заменадополнеиеФотографииРастенийToolStripMenuItem.Name = "заменадополнеиеФотографииРастенийToolStripMenuItem";
+            this.заменадополнеиеФотографииРастенийToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
+            this.заменадополнеиеФотографииРастенийToolStripMenuItem.Text = "замена/дополнеие фотографии растений";
+            // 
+            // редактированиеФотографииРастенияToolStripMenuItem
+            // 
+            this.редактированиеФотографииРастенияToolStripMenuItem.Name = "редактированиеФотографииРастенияToolStripMenuItem";
+            this.редактированиеФотографииРастенияToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
+            this.редактированиеФотографииРастенияToolStripMenuItem.Text = "редактирование фотографии растения";
+            // 
+            // таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem
+            // 
+            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem.Name = "таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem";
+            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
+            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem.Text = "таблица Растений, выгрузка из BD в файл";
+            // 
+            // таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem
+            // 
+            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Name = "таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem";
+            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
+            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Text = "таблица Ссылок, выгрузка из BD в файл";
+            // 
+            // фотографииРастенийВыгрузкаАрхивToolStripMenuItem
+            // 
+            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Name = "фотографииРастенийВыгрузкаАрхивToolStripMenuItem";
+            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
+            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Text = "фотографии Растений, выгрузка архив";
+            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Click += new System.EventHandler(this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem_Click);
             // 
             // папкиСФотографиямиToolStripMenuItem
             // 
@@ -150,6 +194,18 @@
             this.заToolStripMenuItem.Name = "заToolStripMenuItem";
             this.заToolStripMenuItem.Size = new System.Drawing.Size(185, 23);
             this.заToolStripMenuItem.Text = "записки и всё про проект";
+            // 
+            // историяПроектаToolStripMenuItem
+            // 
+            this.историяПроектаToolStripMenuItem.Name = "историяПроектаToolStripMenuItem";
+            this.историяПроектаToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
+            this.историяПроектаToolStripMenuItem.Text = "История проекта";
+            // 
+            // инструкцияПользователяToolStripMenuItem
+            // 
+            this.инструкцияПользователяToolStripMenuItem.Name = "инструкцияПользователяToolStripMenuItem";
+            this.инструкцияПользователяToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
+            this.инструкцияПользователяToolStripMenuItem.Text = "Инструкция пользователя";
             // 
             // тестМетодаToolStripMenuItem
             // 
@@ -229,61 +285,6 @@
             this.button1.Text = "перегрузка таблицы";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem
-            // 
-            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem.Name = "таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem";
-            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
-            this.таблицаРастенийВыгрузкаИзBDВФайлToolStripMenuItem.Text = "таблица Растений, выгрузка из BD в файл";
-            // 
-            // таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem
-            // 
-            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Name = "таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem";
-            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
-            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Text = "таблица Ссылок, выгрузка из BD в файл";
-            // 
-            // фотографииРастенийВыгрузкаАрхивToolStripMenuItem
-            // 
-            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Name = "фотографииРастенийВыгрузкаАрхивToolStripMenuItem";
-            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
-            this.фотографииРастенийВыгрузкаАрхивToolStripMenuItem.Text = "фотографии Растений, выгрузка архив";
-            // 
-            // заменадополнеиеФотографииРастенийToolStripMenuItem
-            // 
-            this.заменадополнеиеФотографииРастенийToolStripMenuItem.Name = "заменадополнеиеФотографииРастенийToolStripMenuItem";
-            this.заменадополнеиеФотографииРастенийToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
-            this.заменадополнеиеФотографииРастенийToolStripMenuItem.Text = "замена/дополнеие фотографии растений";
-            // 
-            // редактированиеФотографииРастенияToolStripMenuItem
-            // 
-            this.редактированиеФотографииРастенияToolStripMenuItem.Name = "редактированиеФотографииРастенияToolStripMenuItem";
-            this.редактированиеФотографииРастенияToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
-            this.редактированиеФотографииРастенияToolStripMenuItem.Text = "редактирование фотографии растения";
-            // 
-            // историяПроектаToolStripMenuItem
-            // 
-            this.историяПроектаToolStripMenuItem.Name = "историяПроектаToolStripMenuItem";
-            this.историяПроектаToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
-            this.историяПроектаToolStripMenuItem.Text = "История проекта";
-            // 
-            // инструкцияПользователяToolStripMenuItem
-            // 
-            this.инструкцияПользователяToolStripMenuItem.Name = "инструкцияПользователяToolStripMenuItem";
-            this.инструкцияПользователяToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
-            this.инструкцияПользователяToolStripMenuItem.Text = "Инструкция пользователя";
-            // 
-            // изСмартфонаВБДToolStripMenuItem
-            // 
-            this.изСмартфонаВБДToolStripMenuItem.Name = "изСмартфонаВБДToolStripMenuItem";
-            this.изСмартфонаВБДToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
-            this.изСмартфонаВБДToolStripMenuItem.Text = "из Смартфона в БД";
-            this.изСмартфонаВБДToolStripMenuItem.Click += new System.EventHandler(this.изСмартфонаВБДToolStripMenuItem_Click);
-            // 
-            // аннотацияПроРастениеToolStripMenuItem
-            // 
-            this.аннотацияПроРастениеToolStripMenuItem.Name = "аннотацияПроРастениеToolStripMenuItem";
-            this.аннотацияПроРастениеToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
-            this.аннотацияПроРастениеToolStripMenuItem.Text = "аннотация про растение";
             // 
             // Menu_14
             // 

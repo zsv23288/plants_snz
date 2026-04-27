@@ -1,24 +1,18 @@
 ﻿using Google.Protobuf;
-using MySqlConnector;
+
 using Mysqlx.Session;
 using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
+// using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
-
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySql.Data.MySqlClient;
 namespace Menu_14
 {
-    // PRIVET
-
 
     /// <summary>
     /// Основная линия Добавки новых растений в БД
@@ -226,20 +220,20 @@ namespace Menu_14
                     {
                         DateTime result = DateTime.ParseExact(data[iStr2, 1], format, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                         DateTime result2 = DateTime.ParseExact(data[iStr2 + 1, 1], format, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-                        if (result > result2) 
+                        if (result > result2)
                         {
                             for (int j = 0; j < columnsCount; j++)
                             {
                                 temp = data[iStr, j];
                                 data[iStr, j] = data[iStr2, j];
-                                data[iStr2, j] = temp;  
+                                data[iStr2, j] = temp;
                             }
                         }
                     }
                 }
                 Console.WriteLine($"\n  Создан массив: {data.GetLength(0)} строк × {data.GetLength(1)} столбцов");
                 addRecordBDplants(data);
-                
+
             }
             catch (Exception ex)
             {
@@ -256,7 +250,7 @@ namespace Menu_14
                 var conporisionName = setMethods.findName_latPlants(name_latArx); // проверка наличие названия name_lat в базе MySQL
                 if (conporisionName.Count > 0) //  есть совпадение
                 {
-                    setMethods.weAddFotos(clearArray[i_Arx, 1], clearArray[i_Arx,2]);
+                    setMethods.weAddFotos(clearArray[i_Arx, 1], clearArray[i_Arx, 2]);
                 }
                 else // записыаем новую строку
                 {
@@ -354,53 +348,53 @@ namespace Menu_14
             // Ваша реализация метода
             Console.WriteLine("Record in BD plants, Ok!");
         }
-                    
+
         public static List<(int id, string name_lat, DateTime time_last)> findName_latPlants(string searchName) // проверка наличие названия name_lat в базе MySQL
         {
-                var results = new List<(int id, string name_lat, DateTime time_last)>();
+            var results = new List<(int id, string name_lat, DateTime time_last)>();
 
-                // Строка подключения к базе данных (замените на свои параметры)
-                string connectionString = "Server=localhost;Database=snz_flora;User ID=root;Password=root;";
+            // Строка подключения к базе данных (замените на свои параметры)
+            string connectionString = "Server=localhost;Database=snz_flora;User ID=root;Password=root;";
 
-                // SQL запрос с параметром для защиты от SQL-инъекций
-                string query = "SELECT id, name_lat, time_last FROM plants WHERE name_lat LIKE @searchName";
+            // SQL запрос с параметром для защиты от SQL-инъекций
+            string query = "SELECT id, name_lat, time_last FROM plants WHERE name_lat LIKE @searchName";
 
-                try
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    connection.Open();
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        connection.Open();
+                        // Добавляем параметр со знаком % для поиска частичного совпадения
+                        command.Parameters.AddWithValue("@searchName", "%" + searchName + "%");
 
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            // Добавляем параметр со знаком % для поиска частичного совпадения
-                            command.Parameters.AddWithValue("@searchName", "%" + searchName + "%");
-
-                            using (MySqlDataReader reader = command.ExecuteReader())
+                            while (reader.Read())
                             {
-                                while (reader.Read())
-                                {
-                                    int id = reader.GetInt32("id");
-                                    string name_lat = reader.GetString("name_lat");
-                                    DateTime time_last = reader.GetDateTime("time_last");
+                                int id = reader.GetInt32("id");
+                                string name_lat = reader.GetString("name_lat");
+                                DateTime time_last = reader.GetDateTime("time_last");
 
-                                    results.Add((id, name_lat, time_last));
-                                }
+                                results.Add((id, name_lat, time_last));
                             }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Ошибка при поиске в базе данных: {ex.Message}");
-                    // Здесь можно добавить логирование ошибки
-                }
-
-                return results;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при поиске в базе данных: {ex.Message}");
+                // Здесь можно добавить логирование ошибки
             }
 
+            return results;
+        }
+
         public static void subfolderAndFiles(string subFolderZip, string destiSubFoto) // создаём подпапки и добавляем фотографиями
-            {
+        {
             string parentFolder = ConfigurationManager.AppSettings["catSubCutFotos"];
             string fullPath = Path.Combine(parentFolder, destiSubFoto);  // куда будем копировать фото
             string sourceDir = ConfigurationManager.AppSettings["catUnZip"];
@@ -428,7 +422,7 @@ namespace Menu_14
 
                     // Копируем файл (третий параметр - разрешить перезапись)
                     File.Copy(file, destFile, true);
-                    setMethods.ProtocolT(sourceDir, destFile,"");
+                    setMethods.ProtocolT(sourceDir, destFile, "");
                 }
             }
         }
@@ -459,7 +453,7 @@ namespace Menu_14
                     {
                         command.Parameters.AddWithValue("@nameLat", searchName);
 
-                         object result = command.ExecuteScalar();
+                        object result = command.ExecuteScalar();
 
                         if (result != null)
                         {
@@ -494,61 +488,87 @@ namespace Menu_14
                 }
                 // изменить в поле time_last таблицs plants 
                 setMethods.UpdateTimeLastByName(destiSubFoto, dateTimeZip);
-                setMethods.ProtocolT("время другое:", subFolderZip,"");
+                setMethods.ProtocolT("время другое:", subFolderZip, "");
             }
-            else 
-            { 
-                MessageBox.Show("Probably..."); 
+            else
+            {
+                MessageBox.Show("Probably...");
             }
         }
-        // 
-     
 
-public static void UpdateTimeLastByName(string searchName, DateTime newTimeValue)  // замена в поле time_last
-    {
-        string connectionString = "server=localhost;database=snz_flora;uid=root;pwd=root;";
 
-        try
+        public static void UpdateTimeLastByName(string searchName, DateTime newTimeValue)  // замена в поле time_last
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            string connectionString = "server=localhost;database=snz_flora;uid=root;pwd=root;";
+
+            try
             {
-                connection.Open();
-
-                string query = "UPDATE plants SET time_last = @newTime WHERE name_lat = @searchName";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    // Добавляем параметры для защиты от SQL-инъекций
-                    command.Parameters.AddWithValue("@searchName", searchName);
-                    command.Parameters.AddWithValue("@newTime", newTimeValue);
+                    connection.Open();
 
-                    // Выполняем запрос и получаем количество обновленных строк
-                    int rowsAffected = command.ExecuteNonQuery();
+                    string query = "UPDATE plants SET time_last = @newTime WHERE name_lat = @searchName";
 
-                    if (rowsAffected > 0)
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        Console.WriteLine($"Успешно обновлено! Найдено и обновлено записей: {rowsAffected}");
-                        Console.WriteLine($"Для растения '{searchName}' установлено time_last = {newTimeValue}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Растение с именем '{searchName}' не найдено в базе данных");
+                        // Добавляем параметры для защиты от SQL-инъекций
+                        command.Parameters.AddWithValue("@searchName", searchName);
+                        command.Parameters.AddWithValue("@newTime", newTimeValue);
+
+                        // Выполняем запрос и получаем количество обновленных строк
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine($"Успешно обновлено! Найдено и обновлено записей: {rowsAffected}");
+                            Console.WriteLine($"Для растения '{searchName}' установлено time_last = {newTimeValue}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Растение с именем '{searchName}' не найдено в базе данных");
+                        }
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Ошибка MySQL: {ex.Message}");
+                Console.WriteLine($"Код ошибки: {ex.Number}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Общая ошибка: {ex.Message}");
+            }
         }
-        catch (MySqlException ex)
+        public static void ExportDatabase()
         {
-            Console.WriteLine($"Ошибка MySQL: {ex.Message}");
-            Console.WriteLine($"Код ошибки: {ex.Number}");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Общая ошибка: {ex.Message}");
+            // Строка подключения указывает только на сервер и БД
+            string connectionString = "server=localhost;user=root;pwd=root;database=snz_flora;charset=utf8;convertzerodatetime=true;";
+            string backupPath = @"C:\backups\testdb_backup.sql";
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                using (MySqlCommand cmd = conn.CreateCommand())
+                using (MySqlBackup backup = new MySqlBackup(cmd))
+                {
+                    conn.Open();
+
+                    // --- ГЛАВНОЕ: Здесь вы указываете список нужных таблиц ---
+                    // Раскомментируйте строки ниже и укажите имена ваших таблиц
+                    backup.ExportInfo.TablesToBeExportedList.Clear();
+                    backup.ExportInfo.TablesToBeExportedList.Add("plants");       // Пример: таблица "users"
+                    backup.ExportInfo.TablesToBeExportedList.Add("plant_links");    // Пример: таблица "products"
+                                                                                 // -----------------------------------------------------
+
+                    backup.ExportToFile(backupPath);
+                    Console.WriteLine($"✅ Бэкап успешно создан: {backupPath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Ошибка: {ex.Message}");
+            }
         }
     }
-
-   // Использование    UpdateTimeLastByName("Quercus robur", DateTime.Now);
 }
-    }
-

@@ -231,5 +231,10 @@ namespace Menu_14
         {
             setMethods.cleanTable("protocol");
         }
+
+        private void таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setMethods.ExportDatabase();
+        }
     }
 }

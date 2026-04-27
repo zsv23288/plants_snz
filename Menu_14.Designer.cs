@@ -155,6 +155,7 @@
             this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Name = "таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem";
             this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Size = new System.Drawing.Size(351, 26);
             this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Text = "таблица Ссылок, выгрузка из BD в файл";
+            this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem.Click += new System.EventHandler(this.таблицаСсылокВыгрузкаИзBDВФайлToolStripMenuItem_Click);
             // 
             // фотографииРастенийВыгрузкаАрхивToolStripMenuItem
             // 

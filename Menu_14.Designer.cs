@@ -58,6 +58,7 @@
             this.запускFormLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -98,7 +99,8 @@
             // 
             this.ljfdbnmHfcnToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.изСмартфонаВБДToolStripMenuItem,
-            this.аннотацияПроРастениеToolStripMenuItem});
+            this.аннотацияПроРастениеToolStripMenuItem,
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem});
             this.ljfdbnmHfcnToolStripMenuItem.Name = "ljfdbnmHfcnToolStripMenuItem";
             this.ljfdbnmHfcnToolStripMenuItem.Size = new System.Drawing.Size(158, 23);
             this.ljfdbnmHfcnToolStripMenuItem.Text = "добавить растение(я)";
@@ -106,14 +108,14 @@
             // изСмартфонаВБДToolStripMenuItem
             // 
             this.изСмартфонаВБДToolStripMenuItem.Name = "изСмартфонаВБДToolStripMenuItem";
-            this.изСмартфонаВБДToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.изСмартфонаВБДToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
             this.изСмартфонаВБДToolStripMenuItem.Text = "из Смартфона в БД";
             this.изСмартфонаВБДToolStripMenuItem.Click += new System.EventHandler(this.изСмартфонаВБДToolStripMenuItem_Click);
             // 
             // аннотацияПроРастениеToolStripMenuItem
             // 
             this.аннотацияПроРастениеToolStripMenuItem.Name = "аннотацияПроРастениеToolStripMenuItem";
-            this.аннотацияПроРастениеToolStripMenuItem.Size = new System.Drawing.Size(243, 26);
+            this.аннотацияПроРастениеToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
             this.аннотацияПроРастениеToolStripMenuItem.Text = "аннотация про растение";
             // 
             // очисткаToolStripMenuItem
@@ -224,6 +226,7 @@
             this.тестМетодаToolStripMenuItem.Name = "тестМетодаToolStripMenuItem";
             this.тестМетодаToolStripMenuItem.Size = new System.Drawing.Size(98, 23);
             this.тестМетодаToolStripMenuItem.Text = "тест метода";
+            this.тестМетодаToolStripMenuItem.Visible = false;
             // 
             // записьПротоколаToolStripMenuItem
             // 
@@ -288,6 +291,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // дополнеиередакторСсылкИзИнтеретаToolStripMenuItem
+            // 
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Name = "дополнеиередакторСсылкИзИнтеретаToolStripMenuItem";
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Text = "дополнеие/редактор ссылк из интерета";
+            // 
             // Menu_14
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
@@ -341,6 +350,7 @@
         private System.Windows.Forms.ToolStripMenuItem инструкцияПользователяToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изСмартфонаВБДToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem аннотацияПроРастениеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem дополнеиередакторСсылкИзИнтеретаToolStripMenuItem;
     }
 }
 

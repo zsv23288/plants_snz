@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -18,11 +19,72 @@ namespace Menu_14
     public partial class FormLinks : Form
     {
         private string currentFolderPath = "";
+        // Строка подключения к MySQL
+        private string connectionString = "Server=localhost;Database=snz_flora;Uid=root;Pwd=root;";
         public FormLinks()
         {
             InitializeComponent();
             // Подписываемся на событие клика мыши
             triadElements.MouseClick += TriadElements_MouseClick;
+            this.richTextBox1.MouseDoubleClick += new MouseEventHandler(richTextBox1_MouseDoubleClick);
+        }
+        private void richTextBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // Создаём новую форму для ввода
+            using (FormQuestionnaire questionnaireForm = new FormQuestionnaire())
+            {
+                // Показываем форму модально
+                DialogResult result = questionnaireForm.ShowDialog();
+
+                // Если нажата кнопка "Сохранить" и есть текст
+                if (result == DialogResult.OK && questionnaireForm.IsSaved)
+                {
+                    // Сохраняем данные в базу
+                    SaveToDatabase(questionnaireForm.QuestionnaireText);
+                }
+            }
+        }
+
+        private void SaveToDatabase(string questionnaireText)
+        {
+            // Проверяем, что поле Name_Lat не пустое (ключевое поле)
+            if (string.IsNullOrEmpty(this.name_lat))
+            {
+                MessageBox.Show("Поле Name_Lat не заполнено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Обновляем поле questionnaire в таблице plants
+                    string query = "UPDATE plants SET questionnaire = @questionnaire WHERE name_lat = @nameLat";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@questionnaire", questionnaireText);
+                        command.Parameters.AddWithValue("@nameLat", this.name_lat);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Данные успешно сохранены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Строка с таким Name_Lat не найдена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении в базу данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void TriadElements_MouseClick(object sender, MouseEventArgs e)
         {
@@ -267,6 +329,11 @@ namespace Menu_14
         }
 
         private void triadElements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

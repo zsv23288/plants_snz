@@ -540,11 +540,12 @@ namespace Menu_14
                 Console.WriteLine($"Общая ошибка: {ex.Message}");
             }
         }
-        public static void ExportDatabase()
+        public static void ExportDatabase()  // выгрузка БД из MySQL
         {
             // Строка подключения указывает только на сервер и БД
             string connectionString = "server=localhost;user=root;pwd=root;database=snz_flora;charset=utf8;convertzerodatetime=true;";
-            string backupPath = @"C:\backups\testdb_backup.sql";
+            string sevenZipPath = ConfigurationManager.AppSettings["catExport"];
+            string backupPath = sevenZipPath + "db_backup.sql";
 
             try
             {
@@ -560,9 +561,9 @@ namespace Menu_14
                     backup.ExportInfo.TablesToBeExportedList.Add("plants");       // Пример: таблица "users"
                     backup.ExportInfo.TablesToBeExportedList.Add("plant_links");    // Пример: таблица "products"
                                                                                  // -----------------------------------------------------
-
                     backup.ExportToFile(backupPath);
-                    Console.WriteLine($"✅ Бэкап успешно создан: {backupPath}");
+                    //   Console.WriteLine($"✅ Бэкап успешно создан: {backupPath}");
+                    MessageBox.Show($"✅ Бэкап успешно создан: {backupPath}");
                 }
             }
             catch (Exception ex)

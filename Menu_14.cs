@@ -23,6 +23,7 @@ namespace Menu_14
         {
             InitializeComponent();
             dataGridView1.CellClick += DataGridView1_CellClick; //  добавлено событие, нажатие на поле таблицы БД
+            button1_Click(null, null);        
         }
 
         private void оснвныеДанныеИзBDMySQLToolStripMenuItem_Click(object sender, EventArgs e)   // выбор архива из папки
@@ -189,7 +190,7 @@ namespace Menu_14
             //  public static void choiceFile(string folderPath) // поиск первого архива
         }
 
-        private void фотографииРастенийВыгрузкаАрхивToolStripMenuItem_Click(object sender, EventArgs e)
+        private void фотографииРастенийВыгрузкаАрхивToolStripMenuItem_Click(object sender, EventArgs e) // выгрузка из БД всех растений
         {
             string sourceDirectory = ConfigurationManager.AppSettings["catSubCutFotos"];
             string sevenZipPath = ConfigurationManager.AppSettings["UnZip"];

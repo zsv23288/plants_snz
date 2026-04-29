@@ -340,11 +340,29 @@ namespace Menu_14
 
         private void richTextBox1_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
+            MessageBox.Show("Это счастье");
+
+            // Получаем значение nameLat из richTextBox1
+            // string nameLat = this.nameLat;         // richTextBox1.Text.Trim();
+            string nameLat = this.nameLat.Text.Trim();
+            // Получаем данные из БД (если нужно)
+            string questionnaireContent = GetQuestionnaireFromDB(nameLat);
+
             // Создаем экземпляр формы questionnaireEdit
             questionnaireEdit editForm = new questionnaireEdit();
 
+            // Передаем данные в форму (предварительно создав методы в questionnaireEdit)
+            editForm.SetQuestionnaireText(questionnaireContent);
+            editForm.SetNameLat(nameLat);
+
             // Показываем форму модально
             editForm.ShowDialog();
+
+            // После закрытия формы можно проверить результат
+            if (editForm.DialogResult == DialogResult.OK)
+            {
+                MessageBox.Show("Данные сохранены успешно!");
+            }
         }
     }
 }

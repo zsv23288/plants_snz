@@ -340,7 +340,11 @@ namespace Menu_14
 
         private void richTextBox1_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("Это счастье");
+            // Создаем экземпляр формы questionnaireEdit
+            questionnaireEdit editForm = new questionnaireEdit();
+
+            // Показываем форму модально
+            editForm.ShowDialog();
         }
     }
 }

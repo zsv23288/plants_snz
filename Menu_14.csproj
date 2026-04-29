@@ -142,6 +142,12 @@
     <Compile Include="PlantLink.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="questionnaireEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="questionnaireEdit.Designer.cs">
+      <DependentUpon>questionnaireEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="setConverters.cs" />
     <Compile Include="setMethods.cs" />
     <EmbeddedResource Include="FormLinks.resx">
@@ -160,6 +166,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="questionnaireEdit.resx">
+      <DependentUpon>questionnaireEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

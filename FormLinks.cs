@@ -282,5 +282,65 @@ namespace Menu_14
         {
 
         }
+       
+        private void richTextBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // Предполагается, что поле nameLat отображается в richTextBox1
+            string nameLat = richTextBox1.Text.Trim();
+
+            if (string.IsNullOrEmpty(nameLat))
+            {
+                MessageBox.Show("Значение name_lat не указано.");
+                return;
+            }
+
+            string questionnaireContent = GetQuestionnaireFromDB(nameLat);
+
+            //         Form questionnaireEdit = new questionnaireEdit();
+            questionnaireEdit questionnaireEditForm = new questionnaireEdit();
+            //   questionnaireEdit.SetQuestionnaireText(questionnaireContent);
+            //   questionnaireEdit.SetNameLat(nameLat);
+            questionnaireEditForm.SetQuestionnaireText(questionnaireContent);
+            questionnaireEditForm.SetNameLat(nameLat);  
+
+            if (questionnaireEditForm.ShowDialog() == DialogResult.OK)
+            {
+                // Обновление данных после успешного сохранения
+                MessageBox.Show("Данные успешно сохранены.");
+            }
+        }
+
+        private string GetQuestionnaireFromDB(string nameLat)
+        {
+            string questionnaire = "";
+            string query = "SELECT questionnaire FROM plants WHERE name_lat = @name_lat";
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@name_lat", nameLat);
+
+                try
+                {
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        questionnaire = result.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка загрузки данных: " + ex.Message);
+                }
+            }
+
+            return questionnaire;
+        }
+
+        private void richTextBox1_MouseDoubleClick_1(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("Это счастье");
+        }
     }
 }

@@ -50,6 +50,7 @@
             this.buttonRejection.TabIndex = 1;
             this.buttonRejection.Text = "Отказ";
             this.buttonRejection.UseVisualStyleBackColor = true;
+            this.buttonRejection.Click += new System.EventHandler(this.buttonRejection_Click_1);
             // 
             // buttonSave
             // 
@@ -59,6 +60,7 @@
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click_1);
             // 
             // questionnaireEdit
             // 

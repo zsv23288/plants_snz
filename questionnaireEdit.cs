@@ -11,22 +11,16 @@ using System.Windows.Forms;
 
 namespace Menu_14
 {
-    public partial class questionnaireEdit : Form
-    {
-        public questionnaireEdit()
-        {
-            InitializeComponent();
-        }
-    }
+
     public partial class questionnaireEdit : Form
     {
         private string connectionString = "Server=localhost;Database=snz_flora;Uid=root;Pwd=root;";
         private string currentNameLat;
 
- //       public questionnaireEdit()
-  //      {
-   //         InitializeComponent();
-    //    }
+        public questionnaireEdit()
+       {
+          InitializeComponent();
+        }
 
         // Метод для установки текста в richTextBoxEdit
         public void SetQuestionnaireText(string text)
@@ -51,26 +45,13 @@ namespace Menu_14
         // Кнопка "Сохранить"
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(currentNameLat))
-            {
-                MessageBox.Show("Ошибка: name_lat не указан.");
-                return;
-            }
 
-            string updatedText = richTextBoxEdit.Text.Trim();
-            bool success = UpdateQuestionnaireInDB(currentNameLat, updatedText);
-
-            if (success)
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка при сохранении данных в базу.");
-            }
         }
-
+        private void buttonRejection_Click_1(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
         private bool UpdateQuestionnaireInDB(string nameLat, string questionnaireText)
         {
             string query = "UPDATE plants SET questionnaire = @questionnaire WHERE name_lat = @name_lat";
@@ -92,6 +73,28 @@ namespace Menu_14
                     MessageBox.Show("Ошибка обновления БД: " + ex.Message);
                     return false;
                 }
+            }
+        }
+
+        private void buttonSave_Click_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(currentNameLat))
+            {
+                MessageBox.Show("Ошибка: name_lat не указан.");
+                return;
+            }
+
+            string updatedText = richTextBoxEdit.Text.Trim();
+            bool success = UpdateQuestionnaireInDB(currentNameLat, updatedText);
+
+            if (success)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка при сохранении данных в базу.");
             }
         }
     }

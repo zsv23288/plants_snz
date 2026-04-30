@@ -36,6 +36,7 @@
             this.ljfdbnmHfcnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изСмартфонаВБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.аннотацияПроРастениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очисткаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заменадополнеиеФотографииРастенийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеФотографииРастенияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,6 @@
             this.запускFormLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -117,6 +117,12 @@
             this.аннотацияПроРастениеToolStripMenuItem.Name = "аннотацияПроРастениеToolStripMenuItem";
             this.аннотацияПроРастениеToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
             this.аннотацияПроРастениеToolStripMenuItem.Text = "аннотация про растение";
+            // 
+            // дополнеиередакторСсылкИзИнтеретаToolStripMenuItem
+            // 
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Name = "дополнеиередакторСсылкИзИнтеретаToolStripMenuItem";
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Text = "дополнеие/редактор ссылк из интерета";
             // 
             // очисткаToolStripMenuItem
             // 
@@ -210,6 +216,7 @@
             this.инструкцияПользователяToolStripMenuItem.Name = "инструкцияПользователяToolStripMenuItem";
             this.инструкцияПользователяToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.инструкцияПользователяToolStripMenuItem.Text = "Инструкция пользователя";
+            this.инструкцияПользователяToolStripMenuItem.Click += new System.EventHandler(this.инструкцияПользователяToolStripMenuItem_Click);
             // 
             // тестМетодаToolStripMenuItem
             // 
@@ -290,12 +297,6 @@
             this.button1.Text = "перегрузка таблицы";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // дополнеиередакторСсылкИзИнтеретаToolStripMenuItem
-            // 
-            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Name = "дополнеиередакторСсылкИзИнтеретаToolStripMenuItem";
-            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
-            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Text = "дополнеие/редактор ссылк из интерета";
             // 
             // Menu_14
             // 

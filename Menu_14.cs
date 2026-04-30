@@ -237,5 +237,12 @@ namespace Menu_14
         {
             setMethods.ExportDatabase();
         }
+
+        private void инструкцияПользователяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filePath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\instrFloraSNZ.docx"));
+
+            System.Diagnostics.Process.Start(filePath);
+        }
     }
 }

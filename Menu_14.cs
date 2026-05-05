@@ -244,5 +244,10 @@ namespace Menu_14
 
             System.Diagnostics.Process.Start(filePath);
         }
+
+        private void дополнеиередакторСсылкИзИнтеретаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // начнём с утра приделывать код от Виталия
+        }
     }
 }

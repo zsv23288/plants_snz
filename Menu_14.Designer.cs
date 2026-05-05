@@ -123,6 +123,7 @@
             this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Name = "дополнеиередакторСсылкИзИнтеретаToolStripMenuItem";
             this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Size = new System.Drawing.Size(339, 26);
             this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Text = "дополнеие/редактор ссылк из интерета";
+            this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem.Click += new System.EventHandler(this.дополнеиередакторСсылкИзИнтеретаToolStripMenuItem_Click);
             // 
             // очисткаToolStripMenuItem
             // 
